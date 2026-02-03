@@ -33,9 +33,16 @@ app = FastAPI(
 )
 
 # CORS middleware
+# Production origins - add your actual domains here
+PRODUCTION_ORIGINS = [
+    "https://d2wowd7dw25och.cloudfront.net",  # Patient PWA (CloudFront)
+    "https://d24gl9ln0vt8cq.cloudfront.net",  # Doctor PWA (CloudFront)
+    "https://patients.example.com",            # Future custom domain
+    "https://doctors.example.com",             # Future custom domain
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"] if settings.debug else ["https://patients.example.com"],
+    allow_origins=["*"] if settings.debug else PRODUCTION_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
