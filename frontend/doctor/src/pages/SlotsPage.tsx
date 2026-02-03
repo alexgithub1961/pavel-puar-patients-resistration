@@ -13,7 +13,7 @@ export default function SlotsPage() {
   const [bulkForm, setBulkForm] = useState({
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(addDays(new Date(), 30), 'yyyy-MM-dd'),
-    weekdays: [0, 1, 2, 3, 4], // Mon-Fri (0-indexed: Mon=0)
+    weekdays: [6, 0, 1, 2, 3], // Sun-Thu (Israel work week)
     startTimes: ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'],
     durationMinutes: 30,
     slotType: 'follow_up' as SlotType,
@@ -29,7 +29,7 @@ export default function SlotsPage() {
   // Auto-generate settings
   const [autoGenForm, setAutoGenForm] = useState({
     days: 90,
-    weekdays: [0, 1, 2, 3, 4], // Mon-Fri
+    weekdays: [6, 0, 1, 2, 3], // Sun-Thu (Israel work week)
     startTimes: ['09:00', '09:30', '10:00', '10:30', '11:00', '14:00', '14:30', '15:00', '15:30', '16:00'],
     durationMinutes: 30,
   });
@@ -125,13 +125,13 @@ export default function SlotsPage() {
   };
 
   const weekdays = [
+    { value: 6, label: 'Sun' },  // Israel week starts Sunday
     { value: 0, label: 'Mon' },
     { value: 1, label: 'Tue' },
     { value: 2, label: 'Wed' },
     { value: 3, label: 'Thu' },
     { value: 4, label: 'Fri' },
     { value: 5, label: 'Sat' },
-    { value: 6, label: 'Sun' },
   ];
 
   const slotTypes = [
