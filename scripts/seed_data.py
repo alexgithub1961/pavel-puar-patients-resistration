@@ -191,7 +191,8 @@ async def seed_data():
 
         for week_offset in range(1, 9):
             day = now - timedelta(weeks=week_offset)
-            while day.weekday() >= 5:
+            # Israel: Friday (4) and Saturday (5) are off
+            while day.weekday() in (4, 5):
                 day -= timedelta(days=1)
 
             hour = slot_times[week_offset % len(slot_times)]
@@ -225,7 +226,8 @@ async def seed_data():
 
         for day_offset in range(1, 15):
             day = now + timedelta(days=day_offset)
-            if day.weekday() >= 5:
+            # Israel: Friday (4) and Saturday (5) are off
+            if day.weekday() in (4, 5):
                 continue
 
             for hour in slot_times:
@@ -262,7 +264,8 @@ async def seed_data():
         print("  Creating upcoming appointment for demo regular patient...")
         for day_offset in range(3, 10):
             day = now + timedelta(days=day_offset)
-            if day.weekday() < 5:
+            # Israel: work days are Sun-Thu (not Fri/Sat)
+            if day.weekday() not in (4, 5):
                 start_time = day.replace(hour=10, minute=0, second=0, microsecond=0)
                 end_time = start_time + timedelta(minutes=50)
 
