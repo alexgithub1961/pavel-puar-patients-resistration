@@ -1,0 +1,27 @@
+# PUAR-Patients Deployment Info
+# Generated: 2026-02-03T08:20:00Z
+
+# Backend API (App Runner) - HTTPS
+API_URL=https://nmpjiqngaz.us-east-1.awsapprunner.com
+
+# Patient PWA
+PATIENT_S3_BUCKET=puar-patients-patient-pwa-860599907983
+PATIENT_S3_URL=http://puar-patients-patient-pwa-860599907983.s3-website-us-east-1.amazonaws.com
+PATIENT_CF_URL=https://d2wowd7dw25och.cloudfront.net
+PATIENT_CF_DIST=EJW46XTOYR16L
+
+# Doctor PWA
+DOCTOR_S3_BUCKET=puar-patients-doctor-pwa-860599907983
+DOCTOR_S3_URL=http://puar-patients-doctor-pwa-860599907983.s3-website-us-east-1.amazonaws.com
+DOCTOR_CF_URL=https://d24gl9ln0vt8cq.cloudfront.net
+DOCTOR_CF_DIST=E14KU71BQ3VFB9
+
+# Database (RDS PostgreSQL)
+DB_HOST=puar-patients-db.c4pohmvgvnit.us-east-1.rds.amazonaws.com
+DB_NAME=puar_patients
+DB_USER=puar
+
+# AWS Resources
+AWS_REGION=us-east-1
+AWS_ACCOUNT_ID=860599907983
+ECR_REPO=860599907983.dkr.ecr.us-east-1.amazonaws.com/puar-patients

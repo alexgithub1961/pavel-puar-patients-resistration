@@ -1,0 +1,30 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# Env
+.env
+.env.local
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Test
+htmlcov/
+.coverage
+
+# OS
+.DS_Store
+Thumbs.db

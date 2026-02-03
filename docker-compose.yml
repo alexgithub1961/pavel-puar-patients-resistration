@@ -1,0 +1,92 @@
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: puar-patients-db
+    environment:
+      POSTGRES_USER: puar
+      POSTGRES_PASSWORD: puar_secret
+      POSTGRES_DB: puar_patients
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U puar -d puar_patients"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis (for caching and Celery)
+  redis:
+    image: redis:7-alpine
+    container_name: puar-patients-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # FastAPI Backend
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: puar-patients-api
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=puar
+      - DB_PASSWORD=puar_secret
+      - DB_NAME=puar_patients
+      - REDIS_URL=redis://redis:6379/0
+      - DEBUG=true
+      - ENVIRONMENT=development
+    volumes:
+      - .:/app
+      - /app/.venv
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Patient Frontend (Development)
+  patient-frontend:
+    image: node:20-alpine
+    container_name: puar-patients-patient-pwa
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    volumes:
+      - ./frontend/patient:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://api:8000
+    depends_on:
+      - api
+
+  # Doctor Frontend (Development)
+  doctor-frontend:
+    image: node:20-alpine
+    container_name: puar-patients-doctor-pwa
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    volumes:
+      - ./frontend/doctor:/app
+      - /app/node_modules
+    ports:
+      - "3001:3001"
+    environment:
+      - VITE_API_URL=http://api:8000
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
