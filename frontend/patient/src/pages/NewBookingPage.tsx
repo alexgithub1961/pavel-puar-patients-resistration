@@ -29,7 +29,7 @@ export default function NewBookingPage() {
   const [urgencyReason, setUrgencyReason] = useState('');
 
   // Hardcoded doctor ID for MVP (single doctor)
-  const doctorId = '00000000-0000-0000-0000-000000000001';  // Default doctor UUID
+  const doctorId = 'a926a78f-3c8d-4c67-8618-cdce3d06ee05';  // Demo doctor UUID
 
   const { data: bookingWindow } = useQuery({
     queryKey: ['bookingWindow'],
