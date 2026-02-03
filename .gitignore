@@ -5,8 +5,8 @@ __pycache__/
 *.pyo
 .pytest_cache/
 
-# Node
-node_modules/
+# Node (all nested)
+**/node_modules/
 
 # IDE
 .idea/
