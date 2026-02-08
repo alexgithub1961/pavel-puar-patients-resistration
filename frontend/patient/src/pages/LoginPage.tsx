@@ -17,7 +17,7 @@ const loginSchema = z.object({
 type LoginForm = z.infer<typeof loginSchema>;
 
 // Demo account credentials - must match seed_data.py
-const DEMO_ACCOUNTS = {
+const _DEMO_ACCOUNTS = {
   newPatient: {
     email: 'demo.new@example.com',
     password: 'demo1234',
@@ -43,7 +43,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    setValue,
+    // setValue,
     formState: { errors },
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
