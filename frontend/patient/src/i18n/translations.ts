@@ -9,7 +9,7 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   en: {
     // App
-    'app.name': 'PUAR-Patients',
+    'app.name': 'PUAR-Patients v1.0 (deployed 2026-02-08 13:45 UTC)',
     'app.tagline': 'Smart Appointment Management',
 
     // Navigation
@@ -146,7 +146,7 @@ export const translations: Record<Language, Translations> = {
 
   he: {
     // App
-    'app.name': 'PUAR-Patients',
+    'app.name': 'PUAR-Patients v1.0 (deployed 2026-02-08 13:45 UTC)',
     'app.tagline': 'ניהול תורים חכם',
 
     // Navigation
@@ -283,7 +283,7 @@ export const translations: Record<Language, Translations> = {
 
   ru: {
     // App
-    'app.name': 'PUAR-Patients',
+    'app.name': 'PUAR-Patients v1.0 (deployed 2026-02-08 13:45 UTC)',
     'app.tagline': 'Умное управление записями',
 
     // Navigation

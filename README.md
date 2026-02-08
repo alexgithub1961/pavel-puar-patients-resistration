@@ -1,4 +1,4 @@
-# PUAR-Patients
+# PUAR-Patients v1.0
 
 Patient Appointment Management System with intelligent scheduling, compliance tracking, and prioritisation.
 
@@ -28,8 +28,86 @@ Patient Appointment Management System with intelligent scheduling, compliance tr
 
 ### Infrastructure
 - Docker & Docker Compose
-- AWS ECS/Fargate deployment
+- AWS App Runner (API)
+- AWS S3 + CloudFront (Frontend PWAs)
+- AWS RDS PostgreSQL
+- AWS Secrets Manager
 - Redis for caching
+
+## Production URLs
+
+| Service | URL |
+|---------|-----|
+| **Patient PWA** | https://d2wowd7dw25och.cloudfront.net |
+| **Doctor PWA** | https://d24gl9ln0vt8cq.cloudfront.net |
+| **API** | https://nmpjiqngaz.us-east-1.awsapprunner.com |
+| **API Docs** | https://nmpjiqngaz.us-east-1.awsapprunner.com/docs |
+
+## AWS Deployment
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│  Patient PWA    │     │   Doctor PWA    │
+│  (CloudFront)   │     │  (CloudFront)   │
+└────────┬────────┘     └────────┬────────┘
+         │                       │
+         │    ┌──────────────┐   │
+         └────►  S3 Buckets  ◄───┘
+              └──────────────┘
+                     
+┌─────────────────────────────────────────┐
+│            AWS App Runner               │
+│         (FastAPI Backend)               │
+└────────────────┬────────────────────────┘
+                 │
+    ┌────────────┴────────────┐
+    ▼                         ▼
+┌────────────┐        ┌───────────────┐
+│ RDS Postgres│        │Secrets Manager│
+│  (db.t3.micro)      │ (DB + JWT)    │
+└────────────┘        └───────────────┘
+```
+
+### Deployment Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/aws/deploy.sh` | Full stack deploy (RDS, ECR, App Runner, S3, CloudFront) |
+| `scripts/deploy_frontends.sh` | Frontend-only redeploy with cache invalidation |
+
+### Full Deployment
+
+```bash
+# Set AWS profile
+export AWS_PROFILE=aptus
+
+# Deploy entire stack
+./scripts/aws/deploy.sh
+```
+
+This creates:
+- RDS PostgreSQL instance
+- ECR repository + Docker image
+- App Runner service
+- S3 buckets for both PWAs
+- CloudFront distributions (HTTPS)
+- Secrets in AWS Secrets Manager
+
+### Frontend-Only Deployment
+
+```bash
+# Redeploy frontends after changes
+./scripts/deploy_frontends.sh
+```
+
+### AWS Resources
+
+- **Region:** us-east-1
+- **Account:** 860599907983
+- **RDS Host:** puar-patients-db.c4pohmvgvnit.us-east-1.rds.amazonaws.com
+- **ECR Repo:** 860599907983.dkr.ecr.us-east-1.amazonaws.com/puar-patients
 
 ## Quick Start
 

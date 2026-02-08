@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
-        name: 'PUAR-Doctor',
-        short_name: 'PUAR-Doc',
+        name: 'PUAR-Doctor v1.0',
+        short_name: 'PUAR-Doc v1.0',
         description: 'Doctor Appointment Management',
         theme_color: '#3b82f6',
         background_color: '#ffffff',

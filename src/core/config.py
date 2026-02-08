@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     )
 
     # App
-    app_name: str = "PUAR-Patients"
-    app_version: str = "0.1.0"
+    app_name: str = "PUAR-Patients v1.0 (deployed 2026-02-08 13:45 UTC)"
+    app_version: str = "1.0.0"
     debug: bool = False
     environment: Literal["development", "staging", "production"] = "development"
 

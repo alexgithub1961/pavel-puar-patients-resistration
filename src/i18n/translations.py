@@ -5,7 +5,7 @@ from typing import Any
 # English translations (default)
 EN = {
     # General
-    "app.name": "PUAR-Patients",
+    "app.name": "PUAR-Patients v1.0 (deployed 2026-02-08 13:45 UTC)",
     "app.tagline": "Smart Appointment Management",
 
     # Navigation
@@ -135,7 +135,7 @@ EN = {
 # Hebrew translations
 HE = {
     # General
-    "app.name": "PUAR-Patients",
+    "app.name": "PUAR-Patients v1.0 (deployed 2026-02-08 13:45 UTC)",
     "app.tagline": "ניהול תורים חכם",
 
     # Navigation
@@ -265,7 +265,7 @@ HE = {
 # Russian translations
 RU = {
     # General
-    "app.name": "PUAR-Patients",
+    "app.name": "PUAR-Patients v1.0 (deployed 2026-02-08 13:45 UTC)",
     "app.tagline": "Умное управление записями",
 
     # Navigation
